@@ -4,11 +4,17 @@
   "slug": "phpaibot",
   "summary": "A proactive PHP chatbot that simulates human-like thinking by generating thoughts, maintaining memory, and evolving personality with news-aware emotional intelligence",
   "version": "0.3.1",
-  "contact": {
-    "repository": "https://github.com/username/PHPaibot"
-  },
+  "repository": "https://github.com/username/PHPaibot",
   "development_state": {
     "notes": "Status: Phase 3 In Progress - Profile store, admin controls, UI served from webhook API"
+  },
+  "development_plan": {
+    "currentPhase": 3,
+    "phases": [
+      { "number": 1, "name": "Infrastructure Setup & Core Conversational Loop", "description": "Completed" },
+      { "number": 2, "name": "The Thinker", "description": "Completed" },
+      { "number": 3, "name": "Personality & Evolution", "description": "In Progress" }
+    ]
   },
   "goals": [
     "Complete feedback loops for continuous learning",
@@ -29,19 +35,60 @@
     "index.html"
   ],
   "api_endpoints": [
-    "/api/chat",
-    "/api/mood",
-    "/api/process-news",
-    "/api/admin/dev-mock",
-    "/api/users/:userId/profile",
-    "/chat"
+    { "endpoint": "/api/chat", "method": "POST", "description": "Main chat interface" },
+    { "endpoint": "/api/mood", "method": "GET", "description": "Check AI emotional state and topics" },
+    { "endpoint": "/api/process-news", "method": "GET/POST", "description": "Trigger manual news processing" },
+    { "endpoint": "/api/admin/dev-mock", "method": "GET/POST", "description": "View and toggle development mock mode" },
+    { "endpoint": "/api/users/:userId/profile", "method": "GET", "description": "Retrieve user profile" },
+    { "endpoint": "/chat", "method": "GET", "description": "Serve chat UI from webhook API (same origin)" }
+  ],
+  "external_services": {
+    "qdrant": "http://192.168.5.227:6333/",
+    "llm": "remote-llm-endpoint",
+    "embeddings": "remote-embedding-endpoint"
+  },
+  "required_env": [
+    "LLM_URL",
+    "EMBEDDING_URL",
+    "QDRANT_URL",
+    "PORT",
+    "DEV_MOCK"
   ],
   "current_capabilities": [
     "Dynamic thought generation using LLM",
     "News-aware personality with RSS integration",
-    "Emotional state tracking",
+    "Emotional state tracking (-10 to +10 mood scale)",
     "Context-aware conversations using QDRANT semantic search",
-    "Proactive engagement and real-time WebSocket communication"
+    "Proactive engagement with natural conversation flow"
   ],
+  "next_steps": [
+    "Complete feedback loops for continuous learning",
+    "Implement long-term relationship memory beyond individual conversations",
+    "Create opinion formation based on accumulated news and interactions",
+    "Harden admin endpoints with authentication",
+    "Integrate a production LLM/embedding service and disable dev-mock for live runs"
+  ],
+  "architecture": {
+    "overview": "Hybrid push/pull chat system with QDRANT vector database, news processing, and emotional state tracking.",
+    "components": {
+      "conversationalLoop": {
+        "description": "Fast, reactive chat system using QDRANT for semantic search.",
+        "implementation": "Node.js backend handles chat requests, retrieves context from QDRANT, and calls remote LLM.",
+        "files": ["webhook-api/server.js", "index.html"],
+        "status": "Implemented"
+      },
+      "memorySystem": {
+        "description": "QDRANT vector database for semantic conversation storage and retrieval.",
+        "implementation": "Stores conversations and news context with embeddings.",
+        "files": [],
+        "status": "Implemented"
+      }
+    }
+  },
+  "infrastructure": {
+    "type": "docker-compose",
+    "notes": "Docker Compose with optional QDRANT and external LLM/embedding endpoints.",
+    "files": []
+  },
   "lastUpdated": "2025-11-18T12:50:00Z"
 }

@@ -5,6 +5,7 @@
   "summary": "A short description (one sentence) of the project and purpose.",
   "version": "0.1.0",
   "lastUpdated": "<YYYY-MM-DDTHH:MM:SSZ>",
+  "repository": "<https://github.com/owner/repo>",
   "license": "MIT",
   "goals": [
     "Short goal 1",
@@ -23,10 +24,28 @@
     "reviewed_examples": [],
     "notes": "Optional notes for maintainers"
   },
+  "development_plan": {
+    "currentPhase": 1,
+    "phases": []
+  },
   "todo": [
     { "id": "1", "title": "Scaffold project", "status": "pending", "priority": "high" }
   ],
   "files_of_interest": [],
+  "api_endpoints": [],
+  "external_services": {},
+  "required_env": [],
+  "current_capabilities": [],
+  "next_steps": [],
+  "architecture": {
+    "overview": "Short architecture overview",
+    "components": {}
+  },
+  "infrastructure": {
+    "type": "docker-compose",
+    "notes": "Optional deployment notes",
+    "files": []
+  },
   "open_questions": [],
   "contact": {
     "owner": "username"
