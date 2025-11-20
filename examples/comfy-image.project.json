@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.1",
   "name": "Comfy Image - WordPress ComfyUI Integration",
   "slug": "comfy-image",
   "summary": "A WordPress plugin that enables Gutenberg users to generate and insert images using a remote ComfyUI instance via slash commands or a block widget.",

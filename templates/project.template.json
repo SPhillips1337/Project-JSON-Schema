@@ -1,9 +1,10 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.0.1",
   "name": "<Project Human-Readable Name>",
-  "slug": "<project-slug-lowercase-dashed>",
+  "slug": "project-slug",
   "summary": "A short description (one sentence) of the project and purpose.",
   "version": "0.1.0",
+  "lastUpdated": "<YYYY-MM-DDTHH:MM:SSZ>",
   "license": "MIT",
   "goals": [
     "Short goal 1",
