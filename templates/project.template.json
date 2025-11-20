@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "<Project Human-Readable Name>",
+  "slug": "<project-slug-lowercase-dashed>",
+  "summary": "A short description (one sentence) of the project and purpose.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "goals": [
+    "Short goal 1",
+    "Short goal 2"
+  ],
+  "primary_features": [
+    "Feature A",
+    "Feature B"
+  ],
+  "tech_stack": {
+    "language": "php|js|python",
+    "frameworks": "wordpress|react|node"
+  },
+  "development_state": {
+    "scaffold": "not created",
+    "reviewed_examples": [],
+    "notes": "Optional notes for maintainers"
+  },
+  "todo": [
+    { "id": "1", "title": "Scaffold project", "status": "pending", "priority": "high" }
+  ],
+  "files_of_interest": [],
+  "open_questions": [],
+  "contact": {
+    "owner": "username"
+  }
+}

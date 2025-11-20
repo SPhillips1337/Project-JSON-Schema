@@ -1,0 +1,27 @@
+name: Validate JSON manifests
+
+on:
+  pull_request:
+  push:
+    paths:
+      - 'project-json-schema/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli
+      - name: Validate templates
+        run: |
+          echo "Validating template files"
+          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/templates/*.json
+      - name: Validate examples
+        run: |
+          echo "Validating example files"
+          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/examples/*.json

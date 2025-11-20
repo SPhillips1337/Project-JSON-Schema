@@ -1,0 +1,48 @@
+{
+  "name": "Comfy Image - WordPress ComfyUI Integration",
+  "slug": "comfy-image",
+  "summary": "A WordPress plugin that enables Gutenberg users to generate and insert images using a remote ComfyUI instance via slash commands or a block widget.",
+  "version": "0.1.0",
+  "license": "GPL-2.0+",
+  "goals": [
+    "Let editors generate images on-the-fly inside Gutenberg using ComfyUI",
+    "Expose a slash command `/comfy` and a Gutenberg block to create images from text prompts",
+    "Provide an admin UI to configure ComfyUI endpoint, workflow templates and media options",
+    "Optionally save generated images to the WP Media Library and insert them into posts/pages"
+  ],
+  "primary_features": [
+    "Slash-command prompt: `/comfy <description>` inside Gutenberg to call ComfyUI",
+    "Gutenberg block: dedicated UI for prompt + advanced settings (seed, steps, model)",
+    "Admin settings page to set ComfyUI URL, default workflow, and save-to-media behavior",
+    "Server-side proxy endpoints that upload images to ComfyUI, submit workflows, poll for completion, and import results",
+    "Client-side UX: upload preview, progress updates, and image insertion into post content"
+  ],
+  "tech_stack": {
+    "wordpress": ">=5.9",
+    "php": ">=8.0",
+    "javascript": "ESNext (Gutenberg/React via @wordpress/scripts)"
+  },
+  "development_state": {
+    "scaffold": "not created yet (PLAN.md created)",
+    "reviewed_examples": [
+      "image-image-gen/js/main.js",
+      "image-image-gen/README.md",
+      "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect.php",
+      "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect_multi.php"
+    ],
+    "notes": "We have example frontend ComfyUI integration (image-image-gen) and example WP admin patterns (LLM_Auto_Redirect) which will be adapted."
+  },
+  "todo": [
+    { "id": "1", "title": "Create plugin scaffold and repo", "status": "pending" },
+    { "id": "2", "title": "Add plugin metadata and hooks", "status": "pending" }
+  ],
+  "files_of_interest": [
+    "image-image-gen/js/main.js",
+    "image-image-gen/README.md",
+    "image-image-gen/image_qwen_image_edit_2509.json",
+    "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect.php",
+    "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect_multi.php",
+    "PLAN.md"
+  ],
+  "contact": { "owner": "stephen", "project_root": "/home/stephen/Documents/www/comfypress" }
+}

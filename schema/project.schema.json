@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/project-json-schema/v1.json",
+  "title": "Project JSON Schema",
+  "description": "Schema for machine-friendly project manifests used to hand off work to LLMs and developers.",
+  "type": "object",
+  "required": ["schemaVersion", "name", "slug", "summary", "version"],
+  "properties": {
+    "schemaVersion": { "type": "string", "description": "Schema semver version" },
+    "name": { "type": "string" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+    "summary": { "type": "string" },
+    "version": { "type": "string" },
+    "license": { "type": "string" },
+    "goals": { "type": "array", "items": { "type": "string" } },
+    "primary_features": { "type": "array", "items": { "type": "string" } },
+    "secondary_features": { "type": "array", "items": { "type": "string" } },
+    "tech_stack": { "type": "object", "additionalProperties": { "type": "string" } },
+    "comfyui_integration": { "type": "object", "additionalProperties": true },
+    "admin_settings": { "type": "object", "additionalProperties": true },
+    "security_considerations": { "type": "array", "items": { "type": "string" } },
+    "development_state": {
+      "type": "object",
+      "properties": {
+        "scaffold": { "type": "string" },
+        "reviewed_examples": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "todo": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "in_progress", "completed"] },
+          "priority": { "type": "string" }
+        }
+      }
+    },
+    "files_of_interest": { "type": "array", "items": { "type": "string" } },
+    "open_questions": { "type": "array", "items": { "type": "string" } },
+    "contact": { "type": "object", "additionalProperties": { "type": "string" } },
+    "how_to_run_locally": { "type": "object", "additionalProperties": true }
+  }
+}
