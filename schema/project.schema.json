@@ -114,6 +114,55 @@
         "notes": { "type": "string" },
         "files": { "type": "array", "items": { "type": "string" } }
       }
-    }
+    },
+    "status": { "type": "string" },
+    "concept": { "type": "string" },
+    "current_goals": { "type": "array", "items": { "type": "string" } },
+    "key_files": { "type": "object", "additionalProperties": { "type": "string" } },
+    "rarity_system": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "chance": { "type": "number", "minimum": 0, "maximum": 100 },
+          "colors": { "oneOf": [ { "type": "string" }, { "type": "array", "items": { "type": "string" } } ] },
+          "traits": { "oneOf": [ { "type": "string" }, { "type": "array", "items": { "type": "string" } } ] }
+        },
+        "required": ["chance"]
+      }
+    },
+    "generation_modes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "command": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "description": { "type": "string" },
+          "features": { "type": "array", "items": { "type": "string" } },
+          "time": { "oneOf": [ { "type": "string" }, { "type": "number" } ] }
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "completed": { "type": "array", "items": { "type": "string" } },
+        "demo_ready": { "type": "array", "items": { "type": "string" } },
+        "future_enhancements": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "demo_stats": {
+      "type": "object",
+      "properties": {
+        "total_generated": { "type": "integer" },
+        "generation_success_rate": { "oneOf": [ { "type": "number" }, { "type": "string" } ] },
+        "average_generation_time": { "oneOf": [ { "type": "number" }, { "type": "string" } ] },
+        "rarity_breakdown": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    },
+    "progress_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+    "progress_state": { "type": "string" },
+    "next_version_goals": { "oneOf": [ { "type": "string" }, { "type": "array", "items": { "type": "string" } } ] }
   }
 }

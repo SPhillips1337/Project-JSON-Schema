@@ -29,6 +29,7 @@
     "reviewed_examples": [
       "image-image-gen/js/main.js",
       "image-image-gen/README.md",
+      "image-image-gen/image_qwen_image_edit_2509.json",
       "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect.php",
       "LLM_Auto_Redirect_v1.2.0/LLM_Auto_Redirect_multi.php"
     ],
@@ -77,5 +78,25 @@
     "notes": "Runs inside WordPress; no separate infra required for basic usage",
     "files": []
   },
+  "status": "planning",
+  "concept": "Enable image generation in Gutenberg via remote ComfyUI workflows",
+  "current_goals": ["Scaffold plugin", "Add admin settings", "Create ComfyUI workflows"],
+  "key_files": { "includes/api.php": "Server proxy endpoints", "js/block.js": "Gutenberg block code" },
+  "generation_modes": {
+    "default": { "command": "submit_workflow", "url": "http://comfyui.local/api/run", "description": "Primary generation workflow", "features": ["seed","steps"], "time": 12 }
+  },
+  "features": {
+    "completed": [],
+    "demo_ready": ["basic slash command"],
+    "future_enhancements": ["save presets", "progressive image edits"]
+  },
+  "demo_stats": {
+    "generation_success_rate": 0,
+    "average_generation_time": 0,
+    "last_demo_notes": "No demo runs recorded yet; replace with measured values after testing"
+  },
+  "progress_percent": 5,
+  "progress_state": "scaffolding",
+  "next_version_goals": ["admin UI","workflow templates"],
   "contact": { "owner": "stephen", "project_root": "/home/stephen/Documents/www/comfypress" }
 }

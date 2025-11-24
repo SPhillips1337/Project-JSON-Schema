@@ -90,5 +90,26 @@
     "notes": "Docker Compose with optional QDRANT and external LLM/embedding endpoints.",
     "files": []
   },
+  "status": "in_progress",
+  "concept": "Proactive chatbot with long-term memory and evolving personality",
+  "current_goals": ["Stabilize feedback loops","Ship admin UI","Integrate production LLM"],
+  "key_files": { "webhook-api/server.js": "Chat server", "webhook-api/news-processor.js": "News processor" },
+  "generation_modes": {
+    "fast": { "command": "generate_fast", "description": "Low-latency responses using smaller model", "features": ["low_latency"], "time": 0.5 },
+    "accurate": { "command": "generate_accurate", "url": "https://llm.example/api", "description": "Higher-quality responses using remote LLM", "features": ["high_quality"], "time": 3 }
+  },
+  "features": {
+    "completed": ["core conversational loop","basic memory"],
+    "demo_ready": ["chat UI"],
+    "future_enhancements": ["fine-grained persona control"]
+  },
+  "demo_stats": {
+    "generation_success_rate": 98.7,
+    "average_generation_time": 1.2,
+    "last_demo_notes": "Sample values from dev-mock tests; production metrics may differ"
+  },
+  "progress_percent": 65,
+  "progress_state": "stabilizing",
+  "next_version_goals": "improve-personality-tuning",
   "lastUpdated": "2025-11-18T12:50:00Z"
 }

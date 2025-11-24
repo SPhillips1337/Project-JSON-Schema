@@ -4,7 +4,34 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
-- docs: Add CHANGELOG.md (this file)
+- feat(schema): extend schema with non-breaking project-specific fields
+  - Added optional properties to `schema/project.schema.json` to support generation metadata, progress tracking, and operational handoffs:
+    - `status` (string) — human-friendly state (e.g. `planning`, `in_progress`, `completed`)
+    - `concept` (string) — short project concept statement
+    - `current_goals` (array[string]) — high-priority goals
+    - `key_files` (object<string,string>) — map of important files to short descriptions
+    - `rarity_system` (object) — named rarity groups; each entry is an object with:
+      - `chance` (number, 0–100) — percentage chance
+      - `colors` (string | array[string]) — hex color or list of colors
+      - `traits` (string | array[string]) — single trait or list of traits
+    - `generation_modes` (object) — named modes; each entry is an object with:
+      - `command` (string)
+      - `url` (string, `uri` format) — optional remote endpoint
+      - `description` (string)
+      - `features` (array[string])
+      - `time` (string | number) — numeric seconds or descriptive string
+    - `features` (object) — grouped feature lists: `completed`, `demo_ready`, `future_enhancements`
+    - `demo_stats` (object):
+      - `total_generated` (integer)
+      - `generation_success_rate` (number | string) — numeric preferred (percentage), string allowed for legacy values like `"98.7%"`
+      - `average_generation_time` (number | string) — seconds preferred
+      - `rarity_breakdown` (object<string,string>)
+    - `progress_percent` (number, 0–100)
+    - `progress_state` (string)
+    - `next_version_goals` (string | array[string])
+  - These additions are optional and intentionally non-breaking; existing manifests remain valid.
+
+- docs: update examples and template to include placeholders and example values for the new fields
 
 ## 1.0.1 - 2025-11-20
 
@@ -24,10 +51,6 @@ All notable changes to this project are documented in this file.
 - chore(schema): add `lastUpdated` optional field (ISO 8601 string) to allow tools to detect when a manifest was last changed.
 
 - chore: bump example and template `schemaVersion` to `1.0.1` and update `templates/project.template.json` and the examples under `examples/` to include placeholders or extracted values.
-
-Commits:
-- d61c317 — chore(schema): bump schemaVersion to 1.0.1 — add optional lastUpdated and update template/examples
-- a7fbbc9 — feat(schema): add operational fields (repository, api_endpoints, external_services, required_env, capabilities, next_steps, architecture, development_plan, infrastructure)
 
 Notes:
 - Local validation with Ajv succeeded for the template and examples. Ajv emitted warnings about `format: "uri"` and `format: "date-time"` being ignored because `ajv-formats` is not enabled; consider adding `ajv-formats` to CI if you want strict format validation in the workflow.

@@ -47,6 +47,26 @@
     "files": []
   },
   "open_questions": [],
+  "status": "planning",
+  "concept": "<Short concept statement>",
+  "current_goals": ["<goal1>", "<goal2>"],
+  "key_files": { "README.md": "Project README" },
+  "rarity_system": {},
+  "generation_modes": {},
+  "features": {
+    "completed": [],
+    "demo_ready": [],
+    "future_enhancements": []
+  },
+  "demo_stats": {
+    "total_generated": 0,
+    "generation_success_rate": 0,
+    "average_generation_time": 0,
+    "rarity_breakdown": {}
+  },
+  "progress_percent": 0,
+  "progress_state": "not-started",
+  "next_version_goals": [] ,
   "contact": {
     "owner": "username"
   }
