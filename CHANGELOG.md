@@ -4,6 +4,9 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+
+## 1.1.0 - 2025-11-24
+
 - feat(schema): extend schema with non-breaking project-specific fields
   - Added optional properties to `schema/project.schema.json` to support generation metadata, progress tracking, and operational handoffs:
     - `status` (string) — human-friendly state (e.g. `planning`, `in_progress`, `completed`)

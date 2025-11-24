@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.1",
+  "schemaVersion": "1.1.0",
   "name": "<Project Human-Readable Name>",
   "slug": "project-slug",
   "summary": "A short description (one sentence) of the project and purpose.",
