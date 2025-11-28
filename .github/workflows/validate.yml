@@ -22,14 +22,14 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       
       - name: Validate templates against schema
         run: |
           echo "Validating template files against schema"
-          npx ajv validate -s schema/project.schema.json -d templates/project.template.json --strict=false
+          npx ajv validate -s schema/project.schema.json -d templates/project.template.json --strict=false --formats
       
       - name: Validate examples against schema
         run: |
           echo "Validating example files against schema"
-          npx ajv validate -s schema/project.schema.json -d examples/*.json --strict=false
+          npx ajv validate -s schema/project.schema.json -d examples/*.json --strict=false --formats
