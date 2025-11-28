@@ -14,14 +14,21 @@ Contents
 - `schema/project.schema.json` — JSON Schema (draft-07) describing the manifest format.
 - `templates/project.template.json` — starter template for new projects.
 - `examples/` — example project manifests (including `comfy-image.project.json`).
-- `.github/workflows/validate.yml` — CI workflow to validate JSON files against
-  the schema.
+- `.github/workflows/validate.yml` — CI workflow to validate JSON files against the schema.
+- `package.json` — Node.js dependencies and validation scripts.
 - `CONTRIBUTING.md` — how to contribute examples or changes.
 
 Quick validation
-- Install `ajv-cli` (Node): `npm install -g ajv-cli`
+- Install dependencies: `npm install`
+- Validate all files: `npm run validate`
+- Validate only templates: `npm run validate:template`
+- Validate only examples: `npm run validate:examples`
+- Run all tests: `npm test`
+
+Manual validation (alternative)
+- Install `ajv-cli` globally: `npm install -g ajv-cli ajv-formats`
 - Validate examples and templates:
-  `ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json`
+  `ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --formats`
 
 New schema fields (added in Unreleased)
 - This repository added a set of optional, non-breaking fields to better capture

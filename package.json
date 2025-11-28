@@ -1,0 +1,37 @@
+{
+  "name": "project-json-schema",
+  "version": "1.1.0",
+  "description": "JSON Schema and supporting files for standardizing machine-friendly project manifests",
+  "main": "schema/project.schema.json",
+  "scripts": {
+    "validate": "ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json",
+    "validate:strict": "ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --strict",
+    "validate:template": "ajv validate -s schema/project.schema.json -d templates/project.template.json",
+    "validate:examples": "ajv validate -s schema/project.schema.json -d examples/*.json",
+    "lint": "jsonlint schema/project.schema.json templates/project.template.json examples/*.json",
+    "test": "npm run validate && npm run lint && node test",
+    "test:schema": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owner/project-json-schema.git"
+  },
+  "keywords": [
+    "json-schema",
+    "project-manifest",
+    "llm",
+    "developer-tools",
+    "standardization"
+  ],
+  "author": "Project Contributors",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-cli": "^5.0.0",
+    "ajv-formats": "^2.1.1",
+    "jsonlint": "^1.6.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

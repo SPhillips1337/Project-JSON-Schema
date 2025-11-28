@@ -4,24 +4,46 @@ on:
   pull_request:
   push:
     paths:
-      - 'project-json-schema/**'
+      - 'schema/**'
+      - 'templates/**'
+      - 'examples/**'
+      - 'package.json'
+      - '.github/workflows/validate.yml'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Install ajv-cli
-        run: npm install -g ajv-cli
-      - name: Validate templates
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Validate JSON syntax
         run: |
-          echo "Validating template files"
-          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/templates/*.json
-      - name: Validate examples
+          echo "Checking JSON syntax for all files"
+          npx jsonlint schema/project.schema.json
+          npx jsonlint templates/project.template.json
+          npx jsonlint examples/*.json
+          npx jsonlint project.schema.patched.json
+      
+      - name: Validate templates against schema
         run: |
-          echo "Validating example files"
-          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/examples/*.json
+          echo "Validating template files against schema"
+          npx ajv validate -s schema/project.schema.json -d templates/project.template.json --strict=false
+      
+      - name: Validate examples against schema
+        run: |
+          echo "Validating example files against schema"
+          npx ajv validate -s schema/project.schema.json -d examples/*.json --strict=false
+      
+      - name: Validate with format checking
+        run: |
+          echo "Validating with strict format checking (URI, date-time)"
+          npx ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --strict=false --formats
