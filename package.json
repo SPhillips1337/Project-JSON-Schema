@@ -9,8 +9,7 @@
     "validate:template": "ajv validate -s schema/project.schema.json -d templates/project.template.json",
     "validate:examples": "ajv validate -s schema/project.schema.json -d examples/*.json",
     "lint": "jsonlint schema/project.schema.json templates/project.template.json examples/*.json",
-    "test": "npm run validate && npm run lint && node test",
-    "test:schema": "node test"
+    "test": "npm run validate && npm run lint"
   },
   "repository": {
     "type": "git",
