@@ -4,6 +4,38 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Added
+- `package.json` for proper dependency management and npm scripts
+- Comprehensive test suite (`test`) for schema validation edge cases
+- Pre-commit hooks configuration (`.pre-commit-config.yaml`) for code quality
+- `.gitignore` file for Node.js development
+- `SCHEMA_REFERENCE.md` with comprehensive field documentation
+- Enhanced validation patterns for hex colors, semantic versions, and time formats
+- Multiple npm scripts for different validation scenarios
+- JSON linting and formatting support
+
+### Fixed
+- **CRITICAL**: Removed trailing comma in `templates/project.template.json` (line 69)
+- **CRITICAL**: Fixed CI/CD workflow paths to match actual repository structure
+- Added missing `ajv-formats` dependency for proper URI and date-time validation
+- Enhanced schema validation with better error patterns and descriptions
+- Corrected documentation commands to match actual file structure
+
+### Changed
+- Updated `.github/workflows/validate.yml` to use npm dependencies and proper file paths
+- Enhanced schema with stricter validation patterns and better descriptions
+- Improved `README.md` and `CONTRIBUTING.md` with correct commands and file references
+- Added comprehensive validation for rarity system colors (hex pattern validation)
+- Enhanced demo_stats validation with proper percentage and time format patterns
+- Improved generation_modes with better time format validation
+
+### Technical Improvements
+- Added `additionalProperties: false` to prevent schema pollution in nested objects
+- Enhanced type validation with `oneOf` patterns for flexible field types
+- Added minimum/maximum constraints for numeric fields
+- Improved regex patterns for version validation and time formats
+- Added comprehensive descriptions to all schema fields
+
 
 ## 1.1.0 - 2025-11-24
 

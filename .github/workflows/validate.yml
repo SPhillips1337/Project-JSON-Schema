@@ -4,24 +4,32 @@ on:
   pull_request:
   push:
     paths:
-      - 'project-json-schema/**'
+      - 'schema/**'
+      - 'templates/**'
+      - 'examples/**'
+      - 'package.json'
+      - '.github/workflows/validate.yml'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Install ajv-cli
-        run: npm install -g ajv-cli
-      - name: Validate templates
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Validate templates against schema
         run: |
-          echo "Validating template files"
-          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/templates/*.json
-      - name: Validate examples
+          echo "Validating template files against schema"
+          npm run validate:template
+      
+      - name: Validate examples against schema
         run: |
-          echo "Validating example files"
-          ajv validate -s project-json-schema/schema/project.schema.json -d project-json-schema/examples/*.json
+          echo "Validating example files against schema"
+          npm run validate:examples

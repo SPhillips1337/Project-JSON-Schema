@@ -6,11 +6,32 @@
   "type": "object",
   "required": ["schemaVersion", "name", "slug", "summary", "version"],
   "properties": {
-    "schemaVersion": { "type": "string", "description": "Schema semver version" },
-    "name": { "type": "string" },
-    "slug": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
-    "summary": { "type": "string" },
-    "version": { "type": "string" },
+    "schemaVersion": { 
+      "type": "string", 
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Schema semver version (e.g., '1.1.0')" 
+    },
+    "name": { 
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable project name"
+    },
+    "slug": { 
+      "type": "string", 
+      "pattern": "^[a-z0-9_-]+$",
+      "minLength": 1,
+      "description": "URL-safe project identifier (lowercase, numbers, hyphens, underscores only)"
+    },
+    "summary": { 
+      "type": "string",
+      "minLength": 1,
+      "description": "Brief project description"
+    },
+    "version": { 
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.-]+)?$",
+      "description": "Project version following semver format"
+    },
     "license": { "type": "string" },
     "repository": { "type": "string", "format": "uri", "description": "Canonical code repository URL" },
     "goals": { "type": "array", "items": { "type": "string" } },
@@ -124,11 +145,40 @@
       "additionalProperties": {
         "type": "object",
         "properties": {
-          "chance": { "type": "number", "minimum": 0, "maximum": 100 },
-          "colors": { "oneOf": [ { "type": "string" }, { "type": "array", "items": { "type": "string" } } ] },
-          "traits": { "oneOf": [ { "type": "string" }, { "type": "array", "items": { "type": "string" } } ] }
+          "chance": { 
+            "type": "number", 
+            "minimum": 0, 
+            "maximum": 100,
+            "description": "Percentage chance for this rarity group (0-100)"
+          },
+          "colors": { 
+            "oneOf": [ 
+              { 
+                "type": "string",
+                "pattern": "^#[0-9A-Fa-f]{6}$",
+                "description": "Single hex color code"
+              }, 
+              { 
+                "type": "array", 
+                "items": { 
+                  "type": "string",
+                  "pattern": "^#[0-9A-Fa-f]{6}$"
+                },
+                "description": "Array of hex color codes"
+              } 
+            ],
+            "description": "Hex color string or array of hex colors"
+          },
+          "traits": { 
+            "oneOf": [ 
+              { "type": "string" }, 
+              { "type": "array", "items": { "type": "string" } } 
+            ],
+            "description": "Single trait or array of trait strings"
+          }
         },
-        "required": ["chance"]
+        "required": ["chance"],
+        "additionalProperties": false
       }
     },
     "generation_modes": {
@@ -136,12 +186,41 @@
       "additionalProperties": {
         "type": "object",
         "properties": {
-          "command": { "type": "string" },
-          "url": { "type": "string", "format": "uri" },
-          "description": { "type": "string" },
-          "features": { "type": "array", "items": { "type": "string" } },
-          "time": { "oneOf": [ { "type": "string" }, { "type": "number" } ] }
-        }
+          "command": { 
+            "type": "string",
+            "description": "Command to execute this generation mode"
+          },
+          "url": { 
+            "type": "string", 
+            "format": "uri",
+            "description": "Optional endpoint URL for remote generation"
+          },
+          "description": { 
+            "type": "string",
+            "description": "Human-readable description of this generation mode"
+          },
+          "features": { 
+            "type": "array", 
+            "items": { "type": "string" },
+            "description": "List of features supported by this mode"
+          },
+          "time": { 
+            "oneOf": [ 
+              { 
+                "type": "number",
+                "minimum": 0,
+                "description": "Generation time in seconds (numeric preferred)"
+              }, 
+              { 
+                "type": "string",
+                "pattern": "^(~?\\d+(\\.\\d+)?[smh]?|\\d+(\\.\\d+)?\\s*(seconds?|minutes?|hours?)|~\\d+(\\.\\d+)?[smh]?)$",
+                "description": "Generation time as descriptive string (e.g., '~2s', '30 seconds')"
+              } 
+            ],
+            "description": "Generation time - numeric seconds preferred, descriptive strings allowed"
+          }
+        },
+        "additionalProperties": false
       }
     },
     "features": {
@@ -155,11 +234,49 @@
     "demo_stats": {
       "type": "object",
       "properties": {
-        "total_generated": { "type": "integer" },
-        "generation_success_rate": { "oneOf": [ { "type": "number" }, { "type": "string" } ] },
-        "average_generation_time": { "oneOf": [ { "type": "number" }, { "type": "string" } ] },
-        "rarity_breakdown": { "type": "object", "additionalProperties": { "type": "string" } }
-      }
+        "total_generated": { 
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of items generated"
+        },
+        "generation_success_rate": { 
+          "oneOf": [ 
+            { 
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Success rate as percentage (0-100, numeric preferred)"
+            }, 
+            { 
+              "type": "string",
+              "pattern": "^\\d+(\\.\\d+)?%?$",
+              "description": "Success rate as string (e.g., '98.7%' or '98.7')"
+            } 
+          ],
+          "description": "Generation success rate - numeric percentage preferred, strings allowed for legacy"
+        },
+        "average_generation_time": { 
+          "oneOf": [ 
+            { 
+              "type": "number",
+              "minimum": 0,
+              "description": "Average generation time in seconds (numeric preferred)"
+            }, 
+            { 
+              "type": "string",
+              "pattern": "^\\d+(\\.\\d+)?\\s*(s|sec|seconds?|m|min|minutes?|h|hr|hours?)?$",
+              "description": "Average generation time as string (e.g., '2.5s', '30 seconds')"
+            } 
+          ],
+          "description": "Average generation time - seconds preferred, descriptive strings allowed"
+        },
+        "rarity_breakdown": { 
+          "type": "object", 
+          "additionalProperties": { "type": "string" },
+          "description": "Breakdown of rarity occurrences"
+        }
+      },
+      "additionalProperties": false
     },
     "progress_percent": { "type": "number", "minimum": 0, "maximum": 100 },
     "progress_state": { "type": "string" },

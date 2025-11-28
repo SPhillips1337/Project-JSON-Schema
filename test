@@ -1,0 +1,179 @@
+#!/usr/bin/env node
+
+/**
+ * Comprehensive test suite for Project JSON Schema
+ * Tests edge cases, validation patterns, and schema consistency
+ */
+
+const Ajv = require('ajv');
+const addFormats = require('ajv-formats');
+const fs = require('fs');
+const path = require('path');
+
+// Load schema
+const schema = JSON.parse(fs.readFileSync(path.join(__dirname, 'schema/project.schema.json'), 'utf8'));
+
+// Initialize AJV with formats
+const ajv = new Ajv({ allErrors: true, verbose: true });
+addFormats(ajv);
+const validate = ajv.compile(schema);
+
+// Test cases
+const testCases = [
+  {
+    name: 'Valid minimal project',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0'
+    },
+    shouldPass: true
+  },
+  {
+    name: 'Invalid slug with uppercase',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'Test-Project',
+      summary: 'A test project',
+      version: '1.0.0'
+    },
+    shouldPass: false
+  },
+  {
+    name: 'Valid rarity system with hex colors',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0',
+      rarity_system: {
+        common: {
+          chance: 70,
+          colors: '#ffffff',
+          traits: 'basic'
+        },
+        rare: {
+          chance: 20,
+          colors: ['#ff0000', '#00ff00'],
+          traits: ['special', 'unique']
+        }
+      }
+    },
+    shouldPass: true
+  },
+  {
+    name: 'Invalid rarity system with bad hex color',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0',
+      rarity_system: {
+        common: {
+          chance: 70,
+          colors: 'not-a-hex-color',
+          traits: 'basic'
+        }
+      }
+    },
+    shouldPass: false
+  },
+  {
+    name: 'Valid demo stats with numeric values',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0',
+      demo_stats: {
+        total_generated: 1000,
+        generation_success_rate: 98.5,
+        average_generation_time: 2.3
+      }
+    },
+    shouldPass: true
+  },
+  {
+    name: 'Valid demo stats with string values',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0',
+      demo_stats: {
+        total_generated: 1000,
+        generation_success_rate: '98.5%',
+        average_generation_time: '2.3s'
+      }
+    },
+    shouldPass: true
+  },
+  {
+    name: 'Invalid version format',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: 'not-semver'
+    },
+    shouldPass: false
+  },
+  {
+    name: 'Valid generation mode with URI',
+    data: {
+      schemaVersion: '1.1.0',
+      name: 'Test Project',
+      slug: 'test-project',
+      summary: 'A test project',
+      version: '1.0.0',
+      generation_modes: {
+        fast: {
+          command: 'generate --fast',
+          url: 'https://api.example.com/generate',
+          description: 'Fast generation mode',
+          features: ['quick', 'basic'],
+          time: 2.5
+        }
+      }
+    },
+    shouldPass: true
+  }
+];
+
+// Run tests
+console.log('Running Project JSON Schema Tests...\n');
+
+let passed = 0;
+let failed = 0;
+
+testCases.forEach((testCase, index) => {
+  const result = validate(testCase.data);
+  const success = result === testCase.shouldPass;
+  
+  if (success) {
+    console.log(`✅ Test ${index + 1}: ${testCase.name}`);
+    passed++;
+  } else {
+    console.log(`❌ Test ${index + 1}: ${testCase.name}`);
+    if (testCase.shouldPass && !result) {
+      console.log('   Validation errors:', validate.errors);
+    }
+    failed++;
+  }
+});
+
+console.log(`\nResults: ${passed} passed, ${failed} failed`);
+
+if (failed > 0) {
+  process.exit(1);
+}
+
+console.log('\n🎉 All tests passed!');

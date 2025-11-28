@@ -10,9 +10,17 @@ Guidelines
   breaking changes.
 
 How to validate locally
-1. Install Node.js and `ajv-cli`: `npm install -g ajv-cli`
+1. Install dependencies: `npm install`
 2. Run validation:
-   `ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json`
+   - All files: `npm run validate`
+   - Templates only: `npm run validate:template`
+   - Examples only: `npm run validate:examples`
+   - With linting: `npm test`
+
+Alternative (manual validation)
+1. Install Node.js and global tools: `npm install -g ajv-cli ajv-formats jsonlint`
+2. Run validation:
+   `ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --formats`
 
 Pull requests
 - Open a PR to add an example or fix schema issues.
