@@ -4,10 +4,9 @@
   "description": "JSON Schema and supporting files for standardizing machine-friendly project manifests",
   "main": "schema/project.schema.json",
   "scripts": {
-    "validate": "ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --formats",
-    "validate:strict": "ajv validate -s schema/project.schema.json -d templates/project.template.json examples/*.json --strict --formats",
-    "validate:template": "ajv validate -s schema/project.schema.json -d templates/project.template.json --formats",
-    "validate:examples": "ajv validate -s schema/project.schema.json -d examples/*.json --formats",
+    "validate": "node validate.js templates/project.template.json examples/*.json",
+    "validate:template": "node validate.js templates/project.template.json",
+    "validate:examples": "node validate.js examples/*.json",
     "lint": "jsonlint schema/project.schema.json templates/project.template.json examples/*.json",
     "test": "npm run validate && npm run lint"
   },

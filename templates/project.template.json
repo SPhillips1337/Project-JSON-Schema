@@ -4,8 +4,8 @@
   "slug": "project-slug",
   "summary": "A short description (one sentence) of the project and purpose.",
   "version": "0.1.0",
-  "lastUpdated": "<YYYY-MM-DDTHH:MM:SSZ>",
-  "repository": "<https://github.com/owner/repo>",
+  "lastUpdated": "2025-01-15T10:30:00Z",
+  "repository": "https://github.com/owner/repo",
   "license": "MIT",
   "goals": [
     "Short goal 1",

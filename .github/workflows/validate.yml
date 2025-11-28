@@ -27,9 +27,9 @@ jobs:
       - name: Validate templates against schema
         run: |
           echo "Validating template files against schema"
-          npx ajv validate -s schema/project.schema.json -d templates/project.template.json --strict=false --formats
+          npm run validate:template
       
       - name: Validate examples against schema
         run: |
           echo "Validating example files against schema"
-          npx ajv validate -s schema/project.schema.json -d examples/*.json --strict=false --formats
+          npm run validate:examples
