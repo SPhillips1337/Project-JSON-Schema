@@ -4,7 +4,7 @@
   "slug": "comfy-image",
   "summary": "A WordPress plugin that enables Gutenberg users to generate and insert images using a remote ComfyUI instance via slash commands or a block widget.",
   "version": "0.1.0",
-  "repository": "<https://github.com/owner/comfy-image>",
+  "repository": "https://github.com/owner/comfy-image",
   "license": "GPL-2.0+",
   "goals": [
     "Let editors generate images on-the-fly inside Gutenberg using ComfyUI",

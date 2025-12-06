@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-json
+        name: Check JSON syntax
+        description: Validates JSON files for syntax errors
+        files: \.(json)$
+      - id: pretty-format-json
+        name: Format JSON files
+        description: Formats JSON files with consistent indentation
+        files: \.(json)$
+        args: ['--autofix', '--indent=2']
+      - id: check-yaml
+        name: Check YAML syntax
+        files: \.(yaml|yml)$
+      - id: end-of-file-fixer
+        name: Fix end of files
+        description: Ensures files end with a newline
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        description: Removes trailing whitespace from files
+
+  - repo: local
+    hooks:
+      - id: validate-schema
+        name: Validate JSON Schema
+        description: Validates all JSON files against the project schema
+        entry: npm run validate
+        language: system
+        files: \.(json)$
+        pass_filenames: false
+        
+      - id: test-schema
+        name: Test Schema Validation
+        description: Runs comprehensive schema tests
+        entry: npm run test:schema
+        language: system
+        files: ^(schema/|test)
+        pass_filenames: false
