@@ -92,8 +92,7 @@
   },
   "demo_stats": {
     "generation_success_rate": 0,
-    "average_generation_time": 0,
-    "last_demo_notes": "No demo runs recorded yet; replace with measured values after testing"
+    "average_generation_time": 0
   },
   "progress_percent": 5,
   "progress_state": "scaffolding",

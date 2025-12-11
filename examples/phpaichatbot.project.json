@@ -105,8 +105,7 @@
   },
   "demo_stats": {
     "generation_success_rate": 98.7,
-    "average_generation_time": 1.2,
-    "last_demo_notes": "Sample values from dev-mock tests; production metrics may differ"
+    "average_generation_time": 1.2
   },
   "progress_percent": 65,
   "progress_state": "stabilizing",
