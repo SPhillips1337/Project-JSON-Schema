@@ -4,6 +4,10 @@ This repository contains a small, practical JSON Schema and supporting files for
 standardizing machine-friendly project manifests ("project.json") that can be
 used to hand off work to language models and developers.
 
+WARNING!
+========
+YOU SHOULD NOT PUT A PROJECT.JSON FILE ON A PRODUCTION SERVER AS IT WILL CONTAIN POTENTIALLY CONFIDENTIAL INFORMATION YOU WOULD NOT WANT PUBLICLY AVAILABLE - IT IS FOR DEV PURPOSES, AND SHOULD BE IN GITIGNORE AND YOUR WEBHOSTING SHOULD BE CONFIGURED NOT TO SERVE IT.
+
 Why
 - Having a single schema and canonical template makes it easy for LLMs to pick up
   and continue work across projects.
