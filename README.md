@@ -29,6 +29,23 @@ Quick validation
 - Validate only examples: `npm run validate:examples`
 - Run all tests: `npm test`
 
+One-line installer
+- Download and run the installer with `curl`:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/SPhillips1337/Project-JSON-Schema/main/install.sh | bash
+  ```
+- Install into a custom directory:
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/SPhillips1337/Project-JSON-Schema/main/install.sh | TARGET_DIR=~/project-json-schema bash
+  ```
+- Prefer to inspect before executing? Download first, then run it:
+  ```bash
+  curl -fsSLO https://raw.githubusercontent.com/SPhillips1337/Project-JSON-Schema/main/install.sh
+  less install.sh
+  bash install.sh
+  ```
+- The installer checks for Node.js 16+, clones this repository if needed, installs npm dependencies, and runs `npm test` unless `SKIP_TESTS=1` is set. When run from an existing `project-json-schema` checkout, it installs in place.
+
 Manual validation (alternative)
 - Install `ajv-cli` globally: `npm install -g ajv-cli ajv-formats`
 - Validate examples and templates:
